@@ -1,0 +1,6 @@
+#Helidon Project Configuration
+#Fri Jul 16 15:37:38 EEST 2021
+schema.version=1.1.0
+helidon.version=2.3.2
+project.flavor=mp
+project.directory=/Users/mitia/Desktop/quickstart-mp
