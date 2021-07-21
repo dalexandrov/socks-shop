@@ -6,7 +6,7 @@ import org.eclipse.microprofile.reactive.messaging.Incoming;
 @ApplicationScoped
 public class DeliveryService {
 
-    @Incoming("delivery")
+    //@Incoming("delivery")
     public void deliverToCustomer(String cartId){
         System.out.println("Delivering cart id: "+cartId);
     }

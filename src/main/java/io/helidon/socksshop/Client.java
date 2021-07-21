@@ -15,6 +15,9 @@ public class Client {
     private String address;
     private String postcode;
 
+    public Client() {
+    }
+
     public Client(Long id, String firstName, String lastName, String address, String postcode) {
         this.id = id;
         this.firstName = firstName;

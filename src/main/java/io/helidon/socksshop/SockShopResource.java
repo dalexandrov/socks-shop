@@ -3,6 +3,7 @@ package io.helidon.socksshop;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -32,5 +33,21 @@ public class SockShopResource {
         responseUri.path(Long.toString(id));
 
         return Response.created(responseUri.build()).build();
+    }
+
+    @GET
+    @Path("/init")
+    public Response init(){
+        shoppingService.init();
+
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("/all")
+    public Response all(){
+        shoppingService.printall();
+
+        return Response.ok().build();
     }
 }
