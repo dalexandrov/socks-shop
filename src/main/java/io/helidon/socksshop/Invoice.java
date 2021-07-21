@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 public class Invoice {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @OneToOne

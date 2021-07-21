@@ -8,11 +8,19 @@ import javax.persistence.Id;
 public class Socks {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     private String model;
     private double price;
+
+    public Socks() {
+    }
+
+    public Socks(Long id, String model, double price) {
+        this.id = id;
+        this.model = model;
+        this.price = price;
+    }
 
     public String getModel() {
         return model;

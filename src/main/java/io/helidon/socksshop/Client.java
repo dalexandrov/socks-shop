@@ -8,13 +8,20 @@ import javax.persistence.Id;
 public class Client {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     private String firstName;
     private String lastName;
     private String address;
     private String postcode;
+
+    public Client(Long id, String firstName, String lastName, String address, String postcode) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.postcode = postcode;
+    }
 
     public String getFirstName() {
         return firstName;
