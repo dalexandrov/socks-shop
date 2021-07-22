@@ -35,6 +35,16 @@ public class SockShopResource {
         return Response.created(responseUri.build()).build();
     }
 
+
+    @GET
+    @Path("/empty")
+    public Response empty(){
+        shoppingService.emptyCheckout();
+
+        return Response.ok().build();
+    }
+
+
     @GET
     @Path("/init")
     public Response init(){
