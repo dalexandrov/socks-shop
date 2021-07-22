@@ -44,11 +44,17 @@ public class ShoppingService {
                 .buildRs();
     }
 
-
     @Transactional
     void printall(){
         Query query = entityManager.createQuery("SELECT c FROM Client c");
         List<Client> result = (List<Client>) query.getResultList();
         result.stream().map(Client::toString).forEach(System.out::println);
+    }
+
+    @Transactional
+    List<Socks> allSocks(){
+        Query query = entityManager.createQuery("SELECT s FROM Socks s");
+        List<Socks> result = (List<Socks>) query.getResultList();
+        return result;
     }
 }

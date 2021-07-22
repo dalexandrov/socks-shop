@@ -1,5 +1,6 @@
 package io.helidon.socksshop;
 
+import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -45,10 +46,9 @@ public class SockShopResource {
     }
 
     @GET
-    @Path("/all")
-    public Response all(){
-        shoppingService.printall();
-
-        return Response.ok().build();
+    @Path("/allSocks")
+    public List<Socks> allSocks(){
+        List<Socks> socks = shoppingService.allSocks();
+        return socks;
     }
 }
