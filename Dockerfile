@@ -1,29 +1,16 @@
-
-# 1st stage, build the app
-FROM maven:3.6-jdk-11 as build
-
-WORKDIR /helidon
-
-# Create a first layer to cache the "Maven World" in the local repository.
-# Incremental docker builds will always resume after that, unless you update
-# the pom
-ADD pom.xml .
-RUN mvn package -Dmaven.test.skip -Declipselink.weave.skip
-
-# Do the Maven build!
-# Incremental docker builds will resume here when you change sources
-ADD src src
-RUN mvn package -DskipTests
-RUN echo "done!"
-
-# 2nd stage, build the runtime image
 FROM openjdk:11-jre-slim
-WORKDIR /helidon
 
-# Copy the binary built in the 1st stage
-COPY --from=build /helidon/target/socks-shop.jar ./
-COPY --from=build /helidon/target/libs ./libs
+RUN apt-get update && apt-get install -y curl
 
-CMD ["java", "-jar", "socks-shop.jar"]
+RUN mkdir -p /opt/helidon
+
+ARG JAR_FILE=socks-shop.jar
+COPY target/${JAR_FILE} /opt/helidon/application.jar
+COPY target/libs /opt/helidon/libs
+
+HEALTHCHECK --start-period=10s --timeout=60s --retries=10 --interval=5s CMD curl -f http://localhost:8080/health/ready || exit 1
+
+ENV JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"
 
 EXPOSE 8080
+ENTRYPOINT exec java -jar $JAVA_OPTS /opt/helidon/application.jar
