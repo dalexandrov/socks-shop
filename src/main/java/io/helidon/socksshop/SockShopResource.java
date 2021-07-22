@@ -44,15 +44,6 @@ public class SockShopResource {
         return Response.ok().build();
     }
 
-
-    @GET
-    @Path("/init")
-    public Response init(){
-        shoppingService.init();
-
-        return Response.ok().build();
-    }
-
     @GET
     @Path("/all")
     public Response all(){
