@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2018, 2020 Oracle and/or its affiliates.
+    Copyright (c) 2021 Oracle and/or its affiliates.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.helidon.applications</groupId>
@@ -37,6 +37,7 @@
         <version.rest-assured>4.3.1</version.rest-assured>
         <version.hamcrest>2.2</version.hamcrest>
         <version.cucumber>6.10.4</version.cucumber>
+        <version.mockito>3.11.2</version.mockito>
     </properties>
 
     <dependencies>
@@ -77,10 +78,10 @@
             <groupId>io.helidon.media</groupId>
             <artifactId>helidon-media-jsonb</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.helidon.messaging.kafka</groupId>-->
-<!--            <artifactId>helidon-messaging-kafka</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.helidon.messaging.kafka</groupId>-->
+        <!--            <artifactId>helidon-messaging-kafka</artifactId>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -100,12 +101,8 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Testing -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
+        <!-- Unit Testing -->
+
         <dependency>
             <groupId>io.helidon.microprofile.tests</groupId>
             <artifactId>helidon-microprofile-tests-junit5</artifactId>
@@ -117,15 +114,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-            <version>${version.testcontainers}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${version.testcontainers}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -157,6 +147,33 @@
             <version>${version.hamcrest}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${version.mockito}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${version.mockito}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Integration Testing -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>${version.testcontainers}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${version.testcontainers}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -182,6 +199,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.jboss.jandex</groupId>
                 <artifactId>jandex-maven-plugin</artifactId>
@@ -191,6 +209,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>io.helidon.build-tools</groupId>
                 <artifactId>helidon-maven-plugin</artifactId>
@@ -200,7 +219,6 @@
                     </execution>
                 </executions>
             </plugin>
-
 
             <plugin>
                 <groupId>com.spotify</groupId>

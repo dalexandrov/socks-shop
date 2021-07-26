@@ -4,10 +4,8 @@ import io.helidon.microprofile.tests.junit5.AddBean;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
 import org.junit.jupiter.api.Test;
 
-
 import javax.inject.Inject;
 import javax.json.JsonArray;
-import javax.json.JsonObject;
 import javax.ws.rs.client.WebTarget;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
