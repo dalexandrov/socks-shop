@@ -3,6 +3,9 @@ package io.helidon.socksshop;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.json.JsonArray;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -47,8 +50,12 @@ public class SockShopResource {
 
     @GET
     @Path("/allSocks")
-    public List<Socks> allSocks(){
+    @Produces(MediaType.APPLICATION_JSON)
+    public String allSocks(){
         List<Socks> socks = shoppingService.allSocks();
-        return socks;
+        Jsonb jsonb = JsonbBuilder.create();
+        String json = jsonb.toJson(socks, Socks[].class);
+        System.out.println(json);
+        return json;
     }
 }
