@@ -56,14 +56,6 @@ public class SockShopResource {
 
 
     @GET
-    @Path("/empty")
-    public Response empty(){
-        shoppingService.emptyCheckout();
-
-        return Response.ok().build();
-    }
-
-    @GET
     @Path("/allSocks")
     @Produces(MediaType.APPLICATION_JSON)
     public String allSocks(){

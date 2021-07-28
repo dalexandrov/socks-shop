@@ -16,13 +16,11 @@ import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public class BuySocksStepsIT extends AbstractIntegrationTest {
+public class BuyAndDeliverStepsIT extends AbstractIntegrationTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BuySocksStepsIT.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BuyAndDeliverStepsIT.class);
 
     private RequestSpecification requestSpecification;
-
-    private io.restassured.response.Response response;
 
     @Before
     public void beforeScenario() {
@@ -54,18 +52,29 @@ public class BuySocksStepsIT extends AbstractIntegrationTest {
 
     @When("a user makes a checkout")
     public void a_user_makes_a_checkout() {
-        response = RestAssured.given(requestSpecification)
+        RestAssured.given(requestSpecification)
                 .accept(MediaType.APPLICATION_JSON)
                 .when()
-                .get("/api/shop/status/100");
-    }
-
-    @Then("checkout performed and submitted for delivery")
-    public void the_output_is_response_with_socks() {
-        response.then()
+                .get("/api/shop/status/100")
+                .then()
                 .statusCode(Response.Status.OK.getStatusCode())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Matchers
                         .equalTo("{\"cart\":[{\"id\":100,\"model\":\"Model1\",\"price\":10.0}],\"client\":{\"address\":\"Somewhere\",\"firstName\":\"Joe\",\"id\":100,\"lastName\":\"Doe\",\"postcode\":\"12345\"},\"id\":100}"));
+
+    }
+
+    @Then("submitted to delivery")
+    public void submitted_to_delivery() throws InterruptedException {
+        Thread.sleep(500);//wait the message to arrive
+        RestAssured.given(requestSpecification)
+                .when()
+                .get("/api/delivery/status/100")
+                .then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Matchers
+                        .equalTo("{\"id\":1,\"shoppingCartId\":100}"));
+
     }
 }
