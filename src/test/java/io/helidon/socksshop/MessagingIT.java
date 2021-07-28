@@ -20,7 +20,7 @@ import javax.inject.Inject;
 
 @HelidonTest
 @Configuration(useExisting = true)
-public class MessagingIntegrationTest {
+public class MessagingIT {
 
     static KafkaContainer kafka = new KafkaContainer();
 
@@ -46,7 +46,8 @@ public class MessagingIntegrationTest {
         configValues.put(KafkaConnector.CONNECTOR_PREFIX + "helidon-kafka.key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         configValues.put(KafkaConnector.CONNECTOR_PREFIX + "helidon-kafka.value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         configValues.put(KafkaConnector.CONNECTOR_PREFIX + "helidon-kafka.key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        configValues.put(KafkaConnector.CONNECTOR_PREFIX + "helidon-kafka.value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        configValues.put(KafkaConnector.CONNECTOR_PREFIX + "helidon-kafka.value.deserializer", "org.apache.kafka.common.s" +
+                "erialization.StringDeserializer");
 
         configValues.put("javax.sql.DataSource.test.dataSourceClassName", "org.h2.jdbcx.JdbcDataSource");
         configValues.put("javax.sql.DataSource.test.dataSource.url", "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false");
@@ -65,7 +66,7 @@ public class MessagingIntegrationTest {
 
     @Test
     public void smokeTest() throws Exception {
-        Thread.sleep(10000);
+        Thread.sleep(50000);
     }
 
     @Outgoing("test-delivery")

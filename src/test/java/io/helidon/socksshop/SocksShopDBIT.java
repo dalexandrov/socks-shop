@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 @HelidonTest
 @Configuration(useExisting = true)
-public class SocksShopIntegrationDBTest {
+public class SocksShopDBIT {
 
     private static MariaDBContainer<?> db = new MariaDBContainer<>("mariadb:10.3.6")
             .withDatabaseName("mydb")

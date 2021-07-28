@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -15,12 +16,13 @@ public class ShoppingCart {
     @Id
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
 
     @OneToMany(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     @JoinColumn(name="socks_id")
     public List<Socks> cart = new ArrayList<>();
@@ -51,5 +53,14 @@ public class ShoppingCart {
 
     public double total(){
         return cart.stream().mapToDouble(Socks::getPrice).sum();
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id=" + id +
+                ", client=" + client +
+                ", cart=" + cart +
+                '}';
     }
 }

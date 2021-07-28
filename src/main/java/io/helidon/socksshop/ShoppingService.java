@@ -45,10 +45,10 @@ public class ShoppingService {
     }
 
     @Transactional
-    void printall(){
-        Query query = entityManager.createQuery("SELECT c FROM Client c");
-        List<Client> result = (List<Client>) query.getResultList();
-        result.stream().map(Client::toString).forEach(System.out::println);
+    ShoppingCart status(long id){
+        Query query = entityManager.createQuery("SELECT cart FROM ShoppingCart cart WHERE cart.id = " + id);
+        ShoppingCart result = (ShoppingCart) query.getSingleResult();
+        return result;
     }
 
     @Transactional

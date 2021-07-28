@@ -10,6 +10,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,8 +29,6 @@ public class SockShopResource {
 
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public Response checkout(ShoppingCart shoppingCart){
         long id = shoppingService.checkout(shoppingCart);
 
@@ -37,6 +36,22 @@ public class SockShopResource {
         responseUri.path(Long.toString(id));
 
         return Response.created(responseUri.build()).build();
+    }
+
+
+    @GET
+    @Path("/status/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response status(@PathParam("id") String id){
+        ShoppingCart cart = shoppingService.status(Long.parseLong(id));
+        Jsonb jsonb = JsonbBuilder.create();
+        String json = jsonb.toJson(cart, ShoppingCart.class);
+        Response response = Response
+                .status(Response.Status.OK)
+                .entity(json)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .build();
+        return response;
     }
 
 
