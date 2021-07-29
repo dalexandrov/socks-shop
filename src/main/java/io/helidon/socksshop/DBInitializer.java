@@ -16,7 +16,6 @@ public class DBInitializer {
 
     @Transactional
     void onStartup(@Observes @Initialized(ApplicationScoped.class) final Object event) {
-        System.out.println("Running init!!!");
         Socks model1 = new Socks(1L, "Model1", 10.00);
         entityManager.persist(model1);
         Socks model2 = new Socks(2L, "Model2", 20.00);

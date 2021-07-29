@@ -35,7 +35,7 @@ public class SockShopResourceMockTest {
         Mockito.doReturn(socksList).when(shoppingService).allSocks();
 
         String response = sockShopResource.allSocks();
-        assertEquals(response, "[{\"model\":\"Model1\",\"price\":10.0},{\"model\":\"Model2\",\"price\":20.0}]");
+        assertEquals(response, "[{\"id\":1,\"model\":\"Model1\",\"price\":10.0},{\"id\":2,\"model\":\"Model2\",\"price\":20.0}]");
         Mockito.verifyNoMoreInteractions(shoppingService);
 
     }

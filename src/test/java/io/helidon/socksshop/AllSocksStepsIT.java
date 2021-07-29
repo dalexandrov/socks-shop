@@ -56,6 +56,6 @@ public class AllSocksStepsIT extends AbstractIntegrationTest {
                 .statusCode(Response.Status.OK.getStatusCode())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Matchers
-                        .equalTo("[{\"model\":\"Model1\",\"price\":10.0},{\"model\":\"Model2\",\"price\":20.0}]"));
+                        .equalTo("[{\"id\":1,\"model\":\"Model1\",\"price\":10.0},{\"id\":2,\"model\":\"Model2\",\"price\":20.0}]"));
     }
 }

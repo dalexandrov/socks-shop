@@ -78,6 +78,10 @@
             <groupId>io.helidon.media</groupId>
             <artifactId>helidon-media-jsonb</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.helidon.microprofile.rest-client</groupId>
+            <artifactId>helidon-microprofile-rest-client</artifactId>
+        </dependency>
         <!--        <dependency>-->
         <!--            <groupId>io.helidon.messaging.kafka</groupId>-->
         <!--            <artifactId>helidon-messaging-kafka</artifactId>-->

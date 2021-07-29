@@ -1,6 +1,5 @@
 package io.helidon.socksshop;
 
-import io.helidon.microprofile.tests.junit5.AddBean;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,6 @@ import javax.ws.rs.client.WebTarget;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @HelidonTest
-@AddBean(SockShopResource.class)
 public class TestSocksResource {
 
     @Inject
@@ -24,6 +22,6 @@ public class TestSocksResource {
                 .request()
                 .get(JsonArray.class);
 
-        assertEquals("[{\"model\":\"Model1\",\"price\":10.0},{\"model\":\"Model2\",\"price\":20.0}]",jsonObject.toString());
+        assertEquals("[{\"id\":1,\"model\":\"Model1\",\"price\":10.0},{\"id\":2,\"model\":\"Model2\",\"price\":20.0}]",jsonObject.toString());
     }
 }
