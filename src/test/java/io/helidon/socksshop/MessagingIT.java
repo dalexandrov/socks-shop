@@ -1,26 +1,44 @@
 package io.helidon.socksshop;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import io.cucumber.java.Before;
 import io.helidon.config.mp.MpConfigSources;
 import io.helidon.messaging.connectors.kafka.KafkaConnector;
 import io.helidon.microprofile.tests.junit5.Configuration;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.specification.RequestSpecification;
 import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.reactivestreams.FlowAdapters;
 import org.reactivestreams.Publisher;
 import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
 
 import java.util.HashMap;
 import java.util.Map;
 import javax.inject.Inject;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import static io.helidon.socksshop.AbstractIntegrationTest.APPLICATION;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @HelidonTest
 @Configuration(useExisting = true)
 public class MessagingIT {
+
+    @Inject
+    WebTarget webTarget;
 
     static KafkaContainer kafka = new KafkaContainer();
 
@@ -64,16 +82,21 @@ public class MessagingIT {
     @Inject
     private ShoppingService shoppingService;
 
+
     @Test
     public void smokeTest() throws Exception {
-        Thread.sleep(50000);
+        Thread.sleep(10000);
+
+        JsonObject jsonObject = webTarget.path("/api/delivery/status/200")
+                .request()
+                .get(JsonObject.class);
+
+        assertEquals("{\"id\":1,\"shoppingCartId\":200}",jsonObject.toString());
     }
 
-    @Outgoing("test-delivery")
+    @Outgoing("delivery")
     public Publisher<String> preparePublisher() {
-        System.out.println("fire!!!");
-        // Create new publisher for emitting to by this::process
-        return ReactiveStreams.of("helllooooo!!!")
+        return ReactiveStreams.of("200")
                 .buildRs();
     }
 

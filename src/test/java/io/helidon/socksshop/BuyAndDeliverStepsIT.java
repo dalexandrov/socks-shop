@@ -30,8 +30,8 @@ public class BuyAndDeliverStepsIT extends AbstractIntegrationTest {
                 .build();
     }
 
-    @Given("a shopping cart with one pair of socks")
-    public void a_shopping_cart_with_one_pair_of_socks() {
+    @Given("a user makes a checkout")
+    public void a_user_makes_a_checkout() {
 
         Socks socks = new Socks(100l, "Model1", 10.0);
         Client client1 = new Client(100L, "Joe", "Doe", "Somewhere", "12345");
@@ -50,8 +50,8 @@ public class BuyAndDeliverStepsIT extends AbstractIntegrationTest {
 
     }
 
-    @When("a user makes a checkout")
-    public void a_user_makes_a_checkout() {
+    @When("the checkout is performed")
+    public void the_checkout_is_performed() {
         RestAssured.given(requestSpecification)
                 .accept(MediaType.APPLICATION_JSON)
                 .when()

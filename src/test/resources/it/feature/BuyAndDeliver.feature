@@ -1,6 +1,6 @@
 Feature: BuySocks
 
   Scenario: Buy one pair of socks
-    Given a shopping cart with one pair of socks
-    When a user makes a checkout
+    Given a user makes a checkout
+    When the checkout is performed
     Then submitted to delivery

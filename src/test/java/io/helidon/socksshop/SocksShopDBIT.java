@@ -1,15 +1,10 @@
 package io.helidon.socksshop;
 
 
-import io.helidon.config.Config;
-import io.helidon.config.ConfigSources;
 import io.helidon.config.mp.MpConfigSources;
-import io.helidon.microprofile.tests.junit5.AddBean;
 import io.helidon.microprofile.tests.junit5.Configuration;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -59,7 +54,6 @@ public class SocksShopDBIT {
 
     @AfterAll
     public static void stopAll() {
-        System.out.println("Stopping AAALLLL!");
         db.stop();
     }
 }
