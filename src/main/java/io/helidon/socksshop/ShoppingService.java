@@ -40,7 +40,7 @@ public class ShoppingService {
         return id;
     }
 
-    @Outgoing("delivery")
+    @Outgoing("outgoing-delivery")
     public Publisher<String> preparePublisher() {
         // Create new publisher for emitting to by this::process
         return ReactiveStreams

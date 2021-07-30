@@ -1,15 +1,21 @@
 package io.helidon.socksshop;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
+
 import java.util.List;
+import javax.annotation.Priority;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
+import javax.jms.Connection;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import static javax.interceptor.Interceptor.Priority.PLATFORM_AFTER;
+
 @ApplicationScoped
-public class DBInitializer {
+public class AppInitializer {
 
     @PersistenceContext(unitName = "test")
     private EntityManager entityManager;
@@ -31,5 +37,12 @@ public class DBInitializer {
         entityManager.persist(cart);
 
         entityManager.flush();
+    }
+
+    private void makeMessagingConnections(@Observes @Priority(PLATFORM_AFTER + 1) @Initialized(ApplicationScoped.class) Object event) throws Throwable{
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost?broker.persistent=false");
+        Connection connection = connectionFactory.createConnection();
+        connection.createSession(false, 1);
+
     }
 }
