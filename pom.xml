@@ -24,7 +24,7 @@
     <parent>
         <groupId>io.helidon.applications</groupId>
         <artifactId>helidon-mp</artifactId>
-        <version>2.3.2</version>
+        <version>2.4.0</version>
         <relativePath/>
     </parent>
     <groupId>io.helidon</groupId>
@@ -33,11 +33,11 @@
     <name>socks-shop</name>
 
     <properties>
-        <version.testcontainers>1.16.0</version.testcontainers>
-        <version.rest-assured>4.3.1</version.rest-assured>
+        <version.testcontainers>1.16.2</version.testcontainers>
+        <version.rest-assured>4.4.0</version.rest-assured>
         <version.hamcrest>2.2</version.hamcrest>
-        <version.cucumber>6.10.4</version.cucumber>
-        <version.mockito>3.11.2</version.mockito>
+        <version.cucumber>7.0.0</version.cucumber>
+        <version.mockito>4.0.0</version.mockito>
     </properties>
 
     <dependencies>
